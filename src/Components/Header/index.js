@@ -5,6 +5,9 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { Routes, Route, Link } from 'react-router-dom'
+import Home from '../Home'
+import General from '../General'
+import Users from '../Users'
 const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -14,11 +17,18 @@ const Header = () => {
             Pyra test
           </Typography>
           <Button color="inherit" variant="outlined">
-            Home
+            <Link to="/">Home</Link>
           </Button>
-          <Button color="inherit">General Info</Button>
+          <Button color="inherit">
+            <Link to="/infos">General Info</Link>
+          </Button>
         </Toolbar>
       </AppBar>
+      <Routes>
+        <Route path="*" element={<Home />} />
+        <Route path="infos" element={<General />} />
+        <Route path="users" element={<Users />} />
+      </Routes>
     </Box>
   )
 }

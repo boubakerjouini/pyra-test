@@ -6,8 +6,6 @@ const App = () => {
   return (
     <>
       <Header />
-
-      <Typography variant="h2">Pyra App</Typography>
     </>
   )
 }
