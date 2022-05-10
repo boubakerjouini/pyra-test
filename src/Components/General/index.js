@@ -1,7 +1,13 @@
 import React from 'react'
-import { Typography } from '@mui/material'
+import { Typography, Box } from '@mui/material'
+import Users from '../Users'
 const General = () => {
-  return <Typography variant="h2">General infos</Typography>
+  return (
+    <Box>
+      <Typography variant="h2">General infos</Typography>
+      <Users />
+    </Box>
+  )
 }
 
 export default General
