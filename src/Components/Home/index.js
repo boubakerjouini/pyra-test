@@ -1,9 +1,13 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
+import Posts from '../Posts'
 const Home = () => {
   return (
     <Box>
-      <Typography variant="h2">Home</Typography>
+      <Typography justifyContent="center" variant="h2">
+        Posts
+      </Typography>
+      <Posts />
     </Box>
   )
 }
