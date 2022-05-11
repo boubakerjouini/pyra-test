@@ -4,7 +4,8 @@ import { useQuery } from 'react-query'
 import CircularProgress from '@mui/material/CircularProgress'
 import { Grid, Paper, Box, Typography } from '@mui/material'
 import InputBase from '@mui/material/InputBase'
-
+import { Link } from 'react-router-dom'
+import { calculate } from '../../utils'
 const Users = () => {
   const querykey = ['users']
   const { isLoading, data, refetch } = useQuery(
@@ -15,8 +16,10 @@ const Users = () => {
     },
   )
   const [search, setSearch] = useState('')
+
   const el = data || []
-  console.log(el)
+  const nbApt = calculate(data)
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -29,7 +32,10 @@ const Users = () => {
           }}
         />
         {isLoading && <CircularProgress />}
-
+        <Grid>
+          <Typography>Suite : {data?.length - nbApt}</Typography>
+          <Typography>Apt : {nbApt}</Typography>
+        </Grid>
         {el
           .filter(val => {
             if (search == '') return val
@@ -39,7 +45,9 @@ const Users = () => {
             return (
               <Paper key={val.id} sx={{ marginBottom: '2rem' }}>
                 <Grid item xs={12} md={4}>
-                  <Typography variant="h5">{val.username}</Typography>
+                  <Link to={`/user/${val.id}`}>
+                    <Typography variant="h5">{val.username}</Typography>
+                  </Link>
                 </Grid>
               </Paper>
             )

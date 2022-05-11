@@ -9,7 +9,7 @@ import InputBase from '@mui/material/InputBase'
 const Posts = () => {
   const [posts, loading, loadPosts] = usePosts()
   const [search, setSearch] = useState('')
-  console.log(posts)
+
   const el = posts || []
 
   return (
