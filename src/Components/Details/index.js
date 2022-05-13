@@ -2,19 +2,31 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Box, Paper, Typography } from '@mui/material'
 
+const classes = {
+  root: {
+    margin: '1rem',
+    padding: '1rem',
+  },
+  container: {
+    textAlign: 'center',
+    marginBottom: '2rem',
+    fontWeight: 'bold',
+  },
+}
+
 const Details = ({ data }) => {
   return (
     <Box lg={8}>
-      <Paper sx={{ margin: '1rem', padding: '1rem' }}>
-        <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: '2rem', fontWeight: 'bold' }}>
+      <Paper sx={classes.root}>
+        <Typography variant="h5" sx={classes.container}>
           Users details
         </Typography>
         <Typography>Name : {data.name}</Typography>
         <Typography>Email : {data.email}</Typography>
         <Typography>Phone : {data.phone}</Typography>
       </Paper>
-      <Paper sx={{ margin: '1rem', padding: '1rem' }}>
-        <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: '2rem', fontWeight: 'bold' }}>
+      <Paper sx={classes.root}>
+        <Typography variant="h5" sx={classes.container}>
           Address
         </Typography>
         <Typography>Street : {data.address.street}</Typography>

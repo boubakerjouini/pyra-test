@@ -2,10 +2,40 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import CircularProgress from '@mui/material/CircularProgress'
-import { Grid, Paper, Box, Typography } from '@mui/material'
+import { Grid, Paper, Box, Typography, Container } from '@mui/material'
 import InputBase from '@mui/material/InputBase'
 import { Link } from 'react-router-dom'
 import { calculate } from '../../utils'
+
+const classes = {
+  root: {
+    maxWidth: '97rem',
+    padding: '0rem 1.5rem 2rem',
+    margin: 'auto',
+  },
+  container: {
+    padding: '2rem',
+  },
+  grid: {
+    padding: '2rem',
+  },
+  typo: {
+    color: '#0B476D',
+    textAlign: 'center',
+    '&:hover': {
+      backgroundColor: '#FFAD50',
+      cursor: 'pointer',
+    },
+  },
+  search: {
+    margin: 3,
+    flex: 1,
+    minWidth: '35vh',
+    borderBottom: '1px solid black',
+    display: 'block',
+  },
+}
+
 const Users = () => {
   const querykey = ['users']
   const { isLoading, data, refetch } = useQuery(
@@ -22,36 +52,43 @@ const Users = () => {
 
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Search Users"
-          inputProps={{ 'aria-label': 'Search Title' }}
-          onChange={event => {
-            setSearch(event.target.value)
-          }}
-        />
+      <Grid>
+        <Typography>Suite : {data?.length - nbApt}</Typography>
+        <Typography>Apt : {nbApt}</Typography>
+      </Grid>
+      <Box sx={classes.root}>
+        <Container>
+          <InputBase
+            sx={classes.search}
+            placeholder="Search Users"
+            inputProps={{ 'aria-label': 'Search Title' }}
+            onChange={event => {
+              setSearch(event.target.value)
+            }}
+          />
+        </Container>
         {isLoading && <CircularProgress />}
-        <Grid>
-          <Typography>Suite : {data?.length - nbApt}</Typography>
-          <Typography>Apt : {nbApt}</Typography>
-        </Grid>
-        {el
-          .filter(val => {
-            if (search == '') return val
-            else if (val.username.toLowerCase().includes(search.toLowerCase())) return val
-          })
-          .map(val => {
-            return (
-              <Paper key={val.id} sx={{ marginBottom: '2rem' }}>
-                <Grid item xs={12} md={4}>
-                  <Link to={`/user/${val.id}`}>
-                    <Typography variant="h5">{val.username}</Typography>
-                  </Link>
+
+        <Grid container sx={classes.container}>
+          {el
+            .filter(val => {
+              if (search == '') return val
+              else if (val.username.toLowerCase().includes(search.toLowerCase())) return val
+            })
+            .map(val => {
+              return (
+                <Grid item xs={12} md={4} sx={classes.grid} key={val.id}>
+                  <Paper>
+                    <Link to={`/user/${val.id}`} style={{ textDecoration: 'none' }}>
+                      <Typography variant="h5" sx={classes.typo}>
+                        {val.username}
+                      </Typography>
+                    </Link>
+                  </Paper>
                 </Grid>
-              </Paper>
-            )
-          })}
+              )
+            })}
+        </Grid>
       </Box>
     </div>
   )

@@ -9,21 +9,34 @@ import Home from '../Home'
 import General from '../General'
 import Users from '../Users'
 import UserDetails from '../UserDetails'
+
+const classes = {
+  container: {
+    backgroundColor: '#FFAD50',
+    color: '#0B476D',
+  },
+  buttons: {
+    color: '#AC6C9F',
+  },
+}
+
 const Header = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box>
+      <AppBar position="static" sx={classes.container}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, justifyContent: 'center' }}>
             Pyra test
           </Typography>
-          <Link to="/">
-            <Button color="inherit" variant="inherit">
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <Button color="inherit" variant="inherit" sx={classes.buttons}>
               Home
             </Button>
           </Link>
-          <Link to="/infos">
-            <Button color="inherit">General Info</Button>
+          <Link to="/infos" style={{ textDecoration: 'none' }}>
+            <Button color="inherit" sx={classes.buttons}>
+              General Info
+            </Button>
           </Link>
         </Toolbar>
       </AppBar>
