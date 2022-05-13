@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../Header'
-
+import { SuiteContext } from '../../Contexts/Suite'
 const App = () => {
+  const [suite, setSuite] = useState(0)
+
   return (
     <>
-      <Header />
+      <SuiteContext.Provider value={{ suite, setSuite }}>
+        <Header />
+      </SuiteContext.Provider>
     </>
   )
 }

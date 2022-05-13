@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -6,7 +6,7 @@ import { Grid, Paper, Box, Typography, Container } from '@mui/material'
 import InputBase from '@mui/material/InputBase'
 import { Link } from 'react-router-dom'
 import { calculate } from '../../utils'
-
+import { SuiteContext } from '../../Contexts/Suite'
 const classes = {
   root: {
     maxWidth: '97rem',
@@ -37,6 +37,7 @@ const classes = {
 }
 
 const Users = () => {
+  const { setSuite } = useContext(SuiteContext)
   const querykey = ['users']
   const { isLoading, data, refetch } = useQuery(
     querykey,
@@ -50,12 +51,10 @@ const Users = () => {
   const el = data || []
   const nbApt = calculate(data)
 
+  setSuite(nbApt)
+
   return (
     <div>
-      <Grid>
-        <Typography>Suite : {data?.length - nbApt}</Typography>
-        <Typography>Apt : {nbApt}</Typography>
-      </Grid>
       <Box sx={classes.root}>
         <Container>
           <InputBase
